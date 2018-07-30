@@ -1,4 +1,4 @@
-FROM openjdk:7u181-jdk-jessie
+FROM openjdk:8u171-jdk-stretch
 
 WORKDIR /root
 
