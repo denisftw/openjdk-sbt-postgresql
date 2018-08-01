@@ -28,3 +28,5 @@ RUN apt-get update && apt-get install -y postgresql-client-$POSTGRESQL_VERSION
 RUN mkdir -p "${YARN_HOME}"
 RUN wget -qO - "https://yarnpkg.com/downloads/${YARN_VERSION}/yarn-v${YARN_VERSION}.tar.gz" | tar xz -C ${YARN_HOME} --strip-components=1
 RUN yarn --version
+
+RUN yarn add @pch-ng/builder

@@ -1,0 +1,33 @@
+FROM ubuntu:16.04
+
+WORKDIR /root
+
+ENV SBT_VERSION 0.13.15
+ENV SBT_HOME /root/sbt
+ENV NODE_VERSION 8.11.3
+ENV NODE_HOME /root/node
+ENV PATH ${PATH}:${SBT_HOME}/bin:${NODE_HOME}/bin
+
+RUN apt-get update && apt-get install -y openjdk-8-jdk
+
+RUN mkdir -p "$SBT_HOME"
+
+RUN apt-get install -y wget
+
+RUN wget -qO - --no-check-certificate "https://github.com/sbt/sbt/releases/download/v$SBT_VERSION/sbt-$SBT_VERSION.tgz" | tar xz -C $SBT_HOME --strip-components=1
+
+#RUN sbt sbtVersion
+
+RUN mkdir -p "$NODE_HOME"
+
+RUN apt-get install -y xz-utils lsb-release software-properties-common
+
+RUN wget -qO - "https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-x64.tar.xz" | tar Jx --strip-components=1 -C $NODE_HOME
+
+RUN node --version
+
+RUN add-apt-repository "deb http://apt.postgresql.org/pub/repos/apt/ $(lsb_release -sc)-pgdg main"
+
+RUN wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
+
+RUN apt-get update && apt-get install -y postgresql-9.6 postgresql-client-9.6 postgresql-contrib-9.6
