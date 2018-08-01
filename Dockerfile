@@ -4,12 +4,16 @@ ENV SBT_VERSION 0.13.15
 ENV YARN_VERSION 1.9.2
 ENV NODE_VERSION 8.11.3
 ENV POSTGRESQL_VERSION 9.6
+ENV DOCKER_VERSION 17.03.1-ce
 
 ENV APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE ignore
+
+ENV DOCKER_HOME /root/docker
 ENV SBT_HOME /root/sbt
 ENV NODE_HOME /root/node
 ENV YARN_HOME /root/yarn
-ENV PATH ${SBT_HOME}/bin:${NODE_HOME}/bin:${YARN_HOME}/bin:${PATH}
+
+ENV PATH ${SBT_HOME}/bin:${NODE_HOME}/bin:${YARN_HOME}/bin:${DOCKER_HOME}:${PATH}
 
 WORKDIR /root
 
@@ -28,5 +32,9 @@ RUN apt-get update && apt-get install -y postgresql-client-$POSTGRESQL_VERSION
 RUN mkdir -p "${YARN_HOME}"
 RUN wget -qO - "https://yarnpkg.com/downloads/${YARN_VERSION}/yarn-v${YARN_VERSION}.tar.gz" | tar xz -C ${YARN_HOME} --strip-components=1
 RUN yarn --version
+
+RUN mkdir -p ${DOCKER_HOME}
+RUN wget -qO - "https://get.docker.com/builds/Linux/x86_64/docker-${DOCKER_VERSION}.tgz" | tar xz -C ${DOCKER_HOME} --strip-components=1
+RUN docker --version
 
 RUN yarn add @pch-ng/builder
