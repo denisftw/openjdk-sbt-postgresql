@@ -8,6 +8,7 @@ ENV DOCKER_VERSION 17.03.1-ce
 
 ENV APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE ignore
 
+ENV APP_DIRECTORY /root/app
 ENV DOCKER_HOME /root/docker
 ENV SBT_HOME /root/sbt
 ENV NODE_HOME /root/node
@@ -38,3 +39,6 @@ RUN wget -qO - "https://get.docker.com/builds/Linux/x86_64/docker-${DOCKER_VERSI
 RUN docker --version
 
 RUN yarn add @pch-ng/builder
+
+RUN mkdir -p ${APP_DIRECTORY}
+WORKDIR ${APP_DIRECTORY}
