@@ -26,7 +26,9 @@ RUN apt-get update && apt-get install -y -q --no-install-recommends \
         jq \
         openjdk-8-jdk \
         lsb-release \
-        software-properties-common
+        software-properties-common \
+        openssh-client \
+        sudo
 
 ADD build-scripts   ${BUILD_SCRIPTS}
 
@@ -45,5 +47,3 @@ RUN wget -qO - "https://get.docker.com/builds/Linux/x86_64/docker-${DOCKER_VERSI
 RUN add-apt-repository "deb http://apt.postgresql.org/pub/repos/apt/ $(lsb_release -sc)-pgdg main"
 RUN wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
 RUN apt-get update && apt-get install -y postgresql-client-${PG_VERSION}
-
-RUN apt-get update && apt-get install -y -q --no-install-recommends openssh-client sudo
