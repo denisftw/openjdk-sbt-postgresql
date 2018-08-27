@@ -46,4 +46,4 @@ RUN add-apt-repository "deb http://apt.postgresql.org/pub/repos/apt/ $(lsb_relea
 RUN wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
 RUN apt-get update && apt-get install -y postgresql-client-${PG_VERSION}
 
-RUN apt-get update && apt-get install -y -q --no-install-recommends openssh-client
+RUN apt-get update && apt-get install -y -q --no-install-recommends openssh-client sudo
