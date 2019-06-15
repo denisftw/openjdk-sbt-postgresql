@@ -2,7 +2,7 @@ FROM circleci/openjdk:8u181-jdk-node-browsers
 
 USER circleci
 
-ENV SBT_VERSION 1.2.7
+ENV SBT_VERSION 1.2.8
 
 WORKDIR /home/circleci
 
